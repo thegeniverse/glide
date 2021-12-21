@@ -1,0 +1,11 @@
+Pillow
+attrs
+torch
+torchvision
+filelock
+requests
+tqdm
+numpy
+PyYAML
+ftfy
+regex

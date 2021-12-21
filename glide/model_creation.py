@@ -1,12 +1,12 @@
-from glide_text2im.gaussian_diffusion import get_named_beta_schedule
-from glide_text2im.respace import SpacedDiffusion, space_timesteps
-from glide_text2im.text2im_model import (
+from glide.gaussian_diffusion import get_named_beta_schedule
+from glide.respace import SpacedDiffusion, space_timesteps
+from glide.text2im_model import (
     InpaintText2ImUNet,
     SuperResInpaintText2ImUnet,
     SuperResText2ImUNet,
     Text2ImUNet,
 )
-from glide_text2im.tokenizer.bpe import get_encoder
+from glide.tokenizer.bpe import get_encoder
 
 
 def model_and_diffusion_defaults():
@@ -46,8 +46,7 @@ def model_and_diffusion_defaults_upsampler():
             num_res_blocks=2,
             noise_schedule="linear",
             super_res=True,
-        )
-    )
+        ))
     return result
 
 
@@ -141,8 +140,9 @@ def create_model(
         else:
             raise ValueError(f"unsupported image size: {image_size}")
     else:
-        channel_mult = tuple(int(ch_mult) for ch_mult in channel_mult.split(","))
-        assert 2 ** (len(channel_mult) + 2) == image_size
+        channel_mult = tuple(
+            int(ch_mult) for ch_mult in channel_mult.split(","))
+        assert 2**(len(channel_mult) + 2) == image_size
 
     attention_ds = []
     for res in attention_resolutions.split(","):
