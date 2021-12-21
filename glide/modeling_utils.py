@@ -71,12 +71,13 @@ def load_model(
     diff_config_dict: Dict = None,
     up_config_dict: Dict = None,
     device: str = "cuda",
+    timestep_respacing: int = 100,
 ):
     if diff_config_dict is None:
         diff_config_dict = model_and_diffusion_defaults()
         diff_config_dict["use_fp16"] = device == "cuda"
         diff_config_dict[
-            "timestep_respacing"] = "100"  # use 100 diffusion steps for fast sampling
+            "timestep_respacing"] = f"{timestep_respacing}"  # use 100 diffusion steps for fast sampling
 
     if up_config_dict is None:
         up_config_dict = model_and_diffusion_defaults_upsampler()
