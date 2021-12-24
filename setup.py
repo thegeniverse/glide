@@ -5,6 +5,7 @@ with open("requirements.txt", "r", encoding="utf-8") as req_file:
 
 setuptools.setup(
     name="glide",
-    packages=["glide"],
+    packages=setuptools.find_packages(),
     install_requires=requirements_list,
+    include_package_data=True,
 )
