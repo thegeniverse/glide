@@ -8,23 +8,30 @@ from filelock import FileLock
 from tqdm.auto import tqdm
 
 MODEL_PATHS = {
-    "base": "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/base.pt",
-    "upsample": "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/upsample.pt",
-    "base-inpaint": "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/base_inpaint.pt",
-    "upsample-inpaint": "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/upsample_inpaint.pt",
-    "clip/image-enc": "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/clip_image_enc.pt",
-    "clip/text-enc": "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/clip_text_enc.pt",
+    "base":
+    "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/base.pt",
+    "upsample":
+    "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/upsample.pt",
+    "base-inpaint":
+    "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/base_inpaint.pt",
+    "upsample-inpaint":
+    "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/upsample_inpaint.pt",
+    "clip/image-enc":
+    "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/clip_image_enc.pt",
+    "clip/text-enc":
+    "https://openaipublic.blob.core.windows.net/diffusion/dec-2021/clip_text_enc.pt",
 }
 
 
 @lru_cache()
 def default_cache_dir() -> str:
-    return os.path.join(os.path.abspath(os.getcwd()), "glide_model_cache")
+    return os.path.join("./.glide_modeling_cache")
 
 
-def fetch_file_cached(
-    url: str, progress: bool = True, cache_dir: Optional[str] = None, chunk_size: int = 4096
-) -> str:
+def fetch_file_cached(url: str,
+                      progress: bool = True,
+                      cache_dir: Optional[str] = None,
+                      chunk_size: int = 4096) -> str:
     """
     Download the file at the given URL into a local file and return the path.
 
@@ -65,7 +72,8 @@ def load_checkpoint(
         raise ValueError(
             f"Unknown checkpoint name {checkpoint_name}. Known names are: {MODEL_PATHS.keys()}."
         )
-    path = fetch_file_cached(
-        MODEL_PATHS[checkpoint_name], progress=progress, cache_dir=cache_dir, chunk_size=chunk_size
-    )
+    path = fetch_file_cached(MODEL_PATHS[checkpoint_name],
+                             progress=progress,
+                             cache_dir=cache_dir,
+                             chunk_size=chunk_size)
     return th.load(path, map_location=device)
