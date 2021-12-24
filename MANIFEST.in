@@ -1,1 +1,1 @@
-recursive-include glide/*
+recursive-include glide *.json *.gz
