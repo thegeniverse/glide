@@ -6,4 +6,4 @@ __pycache__/
 /*.png
 /*.jpg
 
-.glide_modeling_cache
+/glide/.glide_modeling_cache
