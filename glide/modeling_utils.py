@@ -506,6 +506,10 @@ def load_model(
 
 def download_model():
     glide_model = load_model()
+
     glide_model.load_base_models()
+    glide_model.load_inpaint_models()
+    glide_model.load_clip_model()
+
     del glide_model
     torch.cuda.empty_cache()
